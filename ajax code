@@ -1,0 +1,27 @@
+var apiUrl = 'https://YOUR_NATION_URL.nationbuilder.com/api/v1/people/push?access_token=YOUR_ACCESS_TOKEN';
+
+var data = JSON.stringify({
+   "person":{
+      "email":inputData.email,
+      "first_name":inputData.first_name,
+      "last_name":inputData.last_name,
+      "external_id":inputData.id,
+      "tags":[inputData.purchase],
+   }
+});
+
+fetch(apiUrl, {
+  method: 'PUT',
+  body: data,
+  headers: {
+    "Content-Type": "application/json",
+  }
+})
+.then(function(res) {
+  return res.json();
+})
+.then(function(body) {
+  var output = body;
+  callback(null, output);
+})
+.catch(callback);
